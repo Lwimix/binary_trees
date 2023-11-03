@@ -9,8 +9,7 @@
  */
 binary_tree_t *binary_tree_insert_right(binary_tree_t *parent, int value)
 {
-	binary_tree_t *new_node = NULL;
-	int tempint = 0;
+	binary_tree_t *new_node = NULL, *temp_right = NULL;
 
 	if (parent == NULL)
 		return (NULL);
@@ -22,16 +21,13 @@ binary_tree_t *binary_tree_insert_right(binary_tree_t *parent, int value)
 	new_node->left = NULL;
 	new_node->right = NULL;
 	if (parent->right == NULL)/*There was no right node*/
-	{
 		parent->right = new_node;
-		return (new_node);
-	}
 	else/*right node exists*/
 	{
-		tempint = parent->right->n;
+		temp_right = parent->right;
+		new_node->right = temp_right;
 		parent->right = new_node;
-		new_node->right = binary_tree_node(new_node, tempint);
-		return (new_node);
+		new_node->parent = parent;
 	}
-
+	return (new_node);
 }
